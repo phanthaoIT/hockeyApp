@@ -49,8 +49,7 @@ describe('Android App sample', () => {
   
     try {
     let version = await hockey.getDownloadUrl()
-    let link  =  await hockey.getResignedUrl(version)
-    desiredCaps.app = link
+    desiredCaps.app = await hockey.getResignedUrl(version)
       await driver.init(desiredCaps)
     }
     catch (err) {
