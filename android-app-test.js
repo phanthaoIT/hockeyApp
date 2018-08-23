@@ -14,19 +14,31 @@ const kobitonServerConfig = {
   auth: `${username}:${apiKey}`
 }
 
-const desiredCaps = {
+// const desiredCaps = {
+//   sessionName:        'Automation test session',
+//   sessionDescription: 'This is an example for Android app',
+//   deviceOrientation:  'portrait',
+//   captureScreenshots: true,
+//   deviceGroup:        'KOBITON',
+//   deviceName:         deviceName,
+//   platformName:       deviceOS,
+//   app: 'https://appium.github.io/appium/assets/ApiDemos-debug.apk',
+//   appPackage: 'io.appium.android.apis',
+//   appActivity: '.ApiDemos'
+// }
+var desiredCaps = {
   sessionName:        'Automation test session',
-  sessionDescription: 'This is an example for Android app',
-  deviceOrientation:  'portrait',
-  captureScreenshots: true,
-  deviceGroup:        'KOBITON',
-  deviceName:         deviceName,
-  platformName:       deviceOS,
-  app: 'https://appium.github.io/appium/assets/ApiDemos-debug.apk',
-  appPackage: 'io.appium.android.apis',
-  appActivity: '.ApiDemos'
+  sessionDescription: '', 
+  deviceOrientation:  'portrait',  
+  captureScreenshots: true, 
+  
+  app:                'https://appium.github.io/appium/assets/ApiDemos-debug.apk', 
+  deviceGroup:        'KOBITON', 
+  
+  deviceName:         'Galaxy A5(2017)',
+  platformVersion:    '6.0.1',
+  platformName:       'Android' 
 }
-
 let driver
 
 if (!username || !apiKey) {
