@@ -2,8 +2,9 @@ import 'babel-polyfill'
 import 'colors'
 import wd from 'wd'
 import {assert} from 'chai'
+import * as hockey from './hockeyAppApi'
 
-const username = process.env.KOBITON_USERNAME
+const username = process.env.KOBITON_USERNAME 
 const apiKey = process.env.KOBITON_API_KEY 
 const deviceName = process.env.KOBITON_DEVICE_NAME || 'Galaxy Note3'
 const deviceOS = process.env.KOBITON_DEVICE_OS || 'Android'
@@ -13,7 +14,6 @@ const kobitonServerConfig = {
   host: 'api.kobiton.com',
   auth: `${username}:${apiKey}`
 }
-
 const desiredCaps = {
   sessionName:        'Automation test session',
   sessionDescription: 'This is an example for Android app',
@@ -22,9 +22,7 @@ const desiredCaps = {
   deviceGroup:        'KOBITON',
   deviceName:         deviceName,
   platformName:       deviceOS,
-  app: 'https://appium.github.io/appium/assets/ApiDemos-debug.apk',
-  appPackage: 'io.appium.android.apis',
-  appActivity: '.ApiDemos'
+  app:                '',
 }
 
 let driver
@@ -38,7 +36,7 @@ describe('Android App sample', () => {
 
   before(async () => {
     driver = wd.promiseChainRemote(kobitonServerConfig)
-
+ 
     driver.on('status', (info) => {
       console.log(info.cyan)
     })
@@ -48,8 +46,11 @@ describe('Android App sample', () => {
     driver.on('http', (meth, path, data) => {
       console.log(' > ' + meth.magenta, path, (data || '').grey)
     })
-
+  
     try {
+    let version = await hockey.getDownloadUrl()
+    let link  =  await hockey.getResignedUrl(version)
+    desiredCaps.app = link
       await driver.init(desiredCaps)
     }
     catch (err) {
