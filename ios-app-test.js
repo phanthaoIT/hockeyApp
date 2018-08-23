@@ -3,10 +3,8 @@ import 'colors'
 import wd from 'wd'
 import {assert} from 'chai'
 
-const username = process.env.KOBITON_USERNAME || 'phanthao+1'
-const apiKey = process.env.KOBITON_API_KEY || 'fc67c182-4131-4366-82a6-18494a61b828'
-const deviceName = process.env.KOBITON_DEVICE_NAME || 'Galaxy Note3'
-const deviceOS = process.env.KOBITON_DEVICE_OS || 'Android'
+const username = process.env.KOBITON_USERNAME
+const apiKey = process.env.KOBITON_API_KEY
 
 const kobitonServerConfig = {
   protocol: 'https',
@@ -16,15 +14,13 @@ const kobitonServerConfig = {
 
 const desiredCaps = {
   sessionName:        'Automation test session',
-  sessionDescription: 'This is an example for Android app',
-  deviceOrientation:  'portrait',
-  captureScreenshots: true,
-  deviceGroup:        'KOBITON',
-  deviceName:         deviceName,
-  platformName:       deviceOS,
-  app: 'https://appium.github.io/appium/assets/ApiDemos-debug.apk',
-  appPackage: 'io.appium.android.apis',
-  appActivity: '.ApiDemos'
+  sessionDescription: 'This is an example for iOS app', 
+  deviceOrientation:  'portrait',  
+  captureScreenshots: true, 
+  deviceGroup:        'KOBITON', 
+  deviceName:         'iPhone X',
+  platformName:       'iOS',
+  app: 'https://s3-ap-southeast-1.amazonaws.com/kobiton-devvn/apps-test/UIKitCatalog-Test-Adhoc.ipa'
 }
 
 let driver
@@ -34,7 +30,7 @@ if (!username || !apiKey) {
   process.exit(1)
 }
 
-describe('Android App sample', () => {
+describe('iOS App sample', () => {
 
   before(async () => {
     driver = wd.promiseChainRemote(kobitonServerConfig)
@@ -60,10 +56,10 @@ describe('Android App sample', () => {
     }
   })
 
-  it('should show the app label', async () => {
-    await driver.elementByClassName("android.widget.TextView")
+  it('should get text UIKitCatalog', async () => {
+    await driver.waitForElementByXPath('//UIAStaticText')
       .text().then(function(text) {
-        assert.equal(text, 'API Demos')
+        assert.include(text, 'UIKitCatalog')
       })
   })
 

@@ -3,10 +3,8 @@ import 'colors'
 import wd from 'wd'
 import {assert} from 'chai'
 
-const username = process.env.KOBITON_USERNAME || 'phanthao+1'
-const apiKey = process.env.KOBITON_API_KEY || 'fc67c182-4131-4366-82a6-18494a61b828'
-const deviceName = process.env.KOBITON_DEVICE_NAME || 'Galaxy Note3'
-const deviceOS = process.env.KOBITON_DEVICE_OS || 'Android'
+const username = process.env.KOBITON_USERNAME
+const apiKey = process.env.KOBITON_API_KEY
 
 const kobitonServerConfig = {
   protocol: 'https',
@@ -16,15 +14,13 @@ const kobitonServerConfig = {
 
 const desiredCaps = {
   sessionName:        'Automation test session',
-  sessionDescription: 'This is an example for Android app',
-  deviceOrientation:  'portrait',
-  captureScreenshots: true,
-  deviceGroup:        'KOBITON',
-  deviceName:         deviceName,
-  platformName:       deviceOS,
-  app: 'https://appium.github.io/appium/assets/ApiDemos-debug.apk',
-  appPackage: 'io.appium.android.apis',
-  appActivity: '.ApiDemos'
+  sessionDescription: 'This is an example for iOS web', 
+  deviceOrientation:  'portrait',  
+  captureScreenshots: true, 
+  browserName:        'safari', 
+  deviceGroup:        'KOBITON', 
+  deviceName:         'iPhone X',
+  platformName:       'iOS'
 }
 
 let driver
@@ -34,7 +30,7 @@ if (!username || !apiKey) {
   process.exit(1)
 }
 
-describe('Android App sample', () => {
+describe('iOS Web sample', () => {
 
   before(async () => {
     driver = wd.promiseChainRemote(kobitonServerConfig)
@@ -60,11 +56,16 @@ describe('Android App sample', () => {
     }
   })
 
-  it('should show the app label', async () => {
-    await driver.elementByClassName("android.widget.TextView")
-      .text().then(function(text) {
-        assert.equal(text, 'API Demos')
-      })
+  it('should return the title that contains Kobiton', async () => {
+    await driver.get('https://www.google.com')
+    .waitForElementByName('q')
+    .sendKeys('Kobiton')
+    .sleep(3000)
+    .waitForElementByName('btnG')
+    .click()
+    
+    let msg = await driver.title()
+    assert.include(msg, 'Kobiton - Google Search')
   })
 
   after(async () => {
