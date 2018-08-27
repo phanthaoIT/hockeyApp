@@ -2,19 +2,12 @@ import 'babel-polyfill'
 import 'colors'
 import wd from 'wd'
 import {assert} from 'chai'
-const fs = require('fs')
 
-async function readFile(fileName) {
-  await fs.readFile(fileName, function(err, data) {
-      if (err) throw err;
-      return data
-  })
-}
 const username = process.env.KOBITON_USERNAME 
 const apiKey = process.env.KOBITON_API_KEY 
 const deviceName = process.env.KOBITON_DEVICE_NAME || 'Galaxy Note3'
 const deviceOS = process.env.KOBITON_DEVICE_OS || 'Android'
-const app_url = process.env.APP
+const app_url = process.env.URL_APP
 const kobitonServerConfig = {
   protocol: 'https',
   host: 'api.kobiton.com',
@@ -30,7 +23,6 @@ const desiredCaps = {
   platformName:       deviceOS,
   app:                app_url,
 }
-// desiredCaps.app = readFile('test.txt')
 let driver
 
 if (!username || !apiKey) {
