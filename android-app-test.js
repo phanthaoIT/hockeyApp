@@ -54,8 +54,6 @@ describe('Android App sample', () => {
     })
   
     try {
-    let version = await hockey.getDownloadUrl()
-    desiredCaps.app = await hockey.getResignedUrl(version)
       await driver.init(desiredCaps)
     }
     catch (err) {
