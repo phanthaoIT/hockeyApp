@@ -7,7 +7,7 @@ const username = process.env.KOBITON_USERNAME
 const apiKey = process.env.KOBITON_API_KEY 
 const deviceName = process.env.KOBITON_DEVICE_NAME || 'Galaxy Note3'
 const deviceOS = process.env.KOBITON_DEVICE_OS || 'Android'
-const app_url = process.env.URL_APP
+const app_url = process.env.URL_APP 
 const kobitonServerConfig = {
   protocol: 'https',
   host: 'api.kobiton.com',
