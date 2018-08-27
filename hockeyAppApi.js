@@ -60,6 +60,7 @@ async function writeFile(fileName, data) {
 async function main() {
 	let version = await getDownloadUrl()
 	let url = await getResignedUrl(version)
-	writeFile('test.txt',url)
+	console.log(url)
+	// writeFile('test.xml',url)
 }
 main()
