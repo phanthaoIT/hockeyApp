@@ -1,5 +1,4 @@
 const https = require('https')
-const fs = require('fs')
 const hockeyAppToken = process.env.HOCKEYAPP_TOKEN 
 const appId = process.env.APP_ID 
 const format = process.env.FILE_FORMAT || 'apk'
@@ -51,16 +50,10 @@ function getResignedUrl (appVersion) {
 		})
 	})
 }
-async function writeFile(fileName, data) {
-    await fs.writeFile(fileName, data, function (err) {
-        if (err) throw err
-        console.log('File written')
-    })
-}
+
 async function main() {
 	let version = await getDownloadUrl()
 	let url = await getResignedUrl(version)
 	console.log(url)
-	// writeFile('test.xml',url)
 }
 main()
