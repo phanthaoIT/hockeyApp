@@ -1,10 +1,10 @@
-import https from 'https'
-
+const https = require('https')
+const fs = require('fs')
 const hockeyAppToken = process.env.HOCKEYAPP_TOKEN 
 const appId = process.env.APP_ID 
 const format = process.env.FILE_FORMAT || 'apk'
 
-export function getDownloadUrl () {
+function getDownloadUrl () {
 	return new Promise((resolve, reject) => {
 		const options = {
 			host: 'rink.hockeyapp.net',
@@ -30,7 +30,7 @@ export function getDownloadUrl () {
 	})
 }
 
-export function getResignedUrl (appVersion) {
+function getResignedUrl (appVersion) {
 	return new Promise((resolve, reject) => {
 		const options = {
 			host: 'rink.hockeyapp.net',
@@ -51,3 +51,15 @@ export function getResignedUrl (appVersion) {
 		})
 	})
 }
+async function writeFile(fileName, data) {
+    await fs.writeFile(fileName, data, function (err) {
+        if (err) throw err
+        console.log('File written')
+    })
+}
+async function main() {
+	let version = await getDownloadUrl()
+	let url = await getResignedUrl(version)
+	writeFile('test.txt',url)
+}
+main()

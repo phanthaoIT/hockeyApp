@@ -114,3 +114,4 @@ npm run multiple-devices-test
 - The log report includes device log and Appium log as well.
 
   ![session-details-http-logs.png](/javascript/assets/session-details-logs.png)
+
