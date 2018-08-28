@@ -6,8 +6,8 @@ import {assert} from 'chai'
 const username = process.env.KOBITON_USERNAME 
 const apiKey = process.env.KOBITON_API_KEY 
 const app_url = process.env.URL_APP 
-const deviceName = process.env.KOBITON_DEVICE_NAME 
-const deviceOS = process.env.KOBITON_DEVICE_OS
+const deviceName = process.env.KOBITON_DEVICE_NAME || 'Galaxy Note4'
+const deviceOS = process.env.KOBITON_DEVICE_OS || 'Android'
 
 const kobitonServerConfig = {
   protocol: 'https',
