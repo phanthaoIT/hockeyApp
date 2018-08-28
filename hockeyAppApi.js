@@ -1,6 +1,6 @@
 const https = require('https')
-const hockeyAppToken = process.env.HOCKEYAPP_TOKEN 
-const appId = process.env.APP_ID 
+const hockeyAppToken = process.env.HOCKEYAPP_TOKEN || '534047b5470d479d8ae907ffe4c6f4d4'
+const appId = process.env.APP_ID || '656f530f20ed442fbe9500f28853c435'
 const format = process.env.FILE_FORMAT || 'apk'
 
 function getDownloadUrl () {

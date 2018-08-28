@@ -3,11 +3,12 @@ import 'colors'
 import wd from 'wd'
 import {assert} from 'chai'
 
-const username = process.env.KOBITON_USERNAME 
-const apiKey = process.env.KOBITON_API_KEY 
-const deviceName = process.env.KOBITON_DEVICE_NAME || 'Galaxy Note3'
-const deviceOS = process.env.KOBITON_DEVICE_OS || 'Android'
+const username = process.env.KOBITON_USERNAME || 'phanthao+1'
+const apiKey = process.env.KOBITON_API_KEY || 'fc67c182-4131-4366-82a6-18494a61b828'
 const app_url = process.env.URL_APP 
+const deviceName = process.env.KOBITON_DEVICE_NAME || 'Galaxy Note4'
+const deviceOS = process.env.KOBITON_DEVICE_OS || 'Android'
+
 const kobitonServerConfig = {
   protocol: 'https',
   host: 'api.kobiton.com',
