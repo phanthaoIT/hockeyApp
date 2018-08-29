@@ -5,7 +5,7 @@ import {assert} from 'chai'
 
 const username = process.env.KOBITON_USERNAME 
 const apiKey = process.env.KOBITON_API_KEY 
-const app_url = process.env.APP_URL 
+const app_url = process.env.APP_URL || ' https://dl0tgz6ee3upo.cloudfront.net/production/app/builds/029/586/858/original/7897a3b3b83cb111f337b3ecef5f82bc/com.evozi.deviceid_1.3.2-8_minAPI14_nodpi_.apk'
 const deviceName = process.env.KOBITON_DEVICE_NAME || 'Galaxy Note4'
 const deviceOS = process.env.KOBITON_DEVICE_OS || 'Android'
 
