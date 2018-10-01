@@ -22,7 +22,7 @@ const desiredCaps = {
   deviceGroup:        'KOBITON',
   deviceName:         deviceName,
   platformName:       deviceOS,
-  app:                'https://appium.github.io/appium/assets/ApiDemos-debug.apk',
+  app:                process.env.APP_URL,
 }
 let driver
 
