@@ -3,26 +3,40 @@ import 'colors'
 import wd from 'wd'
 import {assert} from 'chai'
 
-const username = process.env.KOBITON_USERNAME 
-const apiKey = process.env.KOBITON_API_KEY 
-const deviceName = process.env.KOBITON_DEVICE_NAME || 'Galaxy Note3'
-const deviceOS = process.env.KOBITON_DEVICE_OS || 'Android'
+const username = process.env.KOBITON_USERNAME
+const apiKey = process.env.KOBITON_API_KEY
+
+const platformVersion = process.env.KOBITON_DEVICE_PLATFORM_VERSION
+const platformName = process.env.KOBITON_DEVICE_PLATFORM_NAME || 'Android'
+const deviceName = process.env.KOBITON_DEVICE_NAME
+
+if (deviceName == null) {
+  if (platformName == 'Android') {
+    deviceName = 'Galaxy*'
+  } else if (platformName == 'iOS') {
+    deviceName = 'iPhone*'
+  }
+}
 
 const kobitonServerConfig = {
   protocol: 'https',
   host: 'api.kobiton.com',
   auth: `${username}:${apiKey}`
 }
+
 const desiredCaps = {
   sessionName:        'Automation test session',
-  sessionDescription: 'This is an example for Android app',
-  deviceOrientation:  'portrait',
-  captureScreenshots: true,
-  deviceGroup:        'KOBITON',
+  sessionDescription: 'Demo Automation Test on Android', 
+  deviceOrientation:  'portrait',  
+  captureScreenshots: true, 
+  app:                '<APP_URL>', 
+  deviceGroup:        'KOBITON', 
   deviceName:         deviceName,
-  platformName:       deviceOS,
-  app:                process.env.APP_URL,
+  platformName:       platformName,
+  platformVersion:    platformVersion
 }
+desiredCaps.app = process.env.APP_URL
+
 let driver
 
 if (!username || !apiKey) {
@@ -34,7 +48,7 @@ describe('Android App sample', () => {
 
   before(async () => {
     driver = wd.promiseChainRemote(kobitonServerConfig)
- 
+
     driver.on('status', (info) => {
       console.log(info.cyan)
     })
@@ -44,7 +58,7 @@ describe('Android App sample', () => {
     driver.on('http', (meth, path, data) => {
       console.log(' > ' + meth.magenta, path, (data || '').grey)
     })
-  
+
     try {
       await driver.init(desiredCaps)
     }
