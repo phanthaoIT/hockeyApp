@@ -8,15 +8,15 @@ const apiKey = process.env.KOBITON_API_KEY
 
 const platformVersion = process.env.KOBITON_DEVICE_PLATFORM_VERSION
 const platformName = process.env.KOBITON_DEVICE_PLATFORM_NAME || 'Android'
-const deviceName = process.env.KOBITON_DEVICE_NAME
+let deviceName = process.env.KOBITON_DEVICE_NAME
 
-if (deviceName == null) {
-  if (platformName == 'Android') {
-    deviceName = 'Galaxy*'
-  } else if (platformName == 'iOS') {
-    deviceName = 'iPhone*'
-  }
-}
+// if (deviceName == null) {
+//   if (platformName == 'Android') {
+//     deviceName = "Galaxy*"
+//   } else if (platformName == 'iOS') {
+//     deviceName = 'iPhone*'
+//   }
+// }
 
 const kobitonServerConfig = {
   protocol: 'https',
