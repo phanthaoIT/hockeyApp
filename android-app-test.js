@@ -3,20 +3,20 @@ import 'colors'
 import wd from 'wd'
 import {assert} from 'chai'
 
-const username = process.env.KOBITON_USERNAME
-const apiKey = process.env.KOBITON_API_KEY
+const username = process.env.KOBITON_USERNAME || 'phanthao'
+const apiKey = process.env.KOBITON_API_KEY || 'fc67c182-4131-4366-82a6-18494a61b828'
 
 const platformVersion = process.env.KOBITON_DEVICE_PLATFORM_VERSION
 const platformName = process.env.KOBITON_DEVICE_PLATFORM_NAME || 'Android'
 let deviceName = process.env.KOBITON_DEVICE_NAME
 
-// if (deviceName == null) {
-//   if (platformName == 'Android') {
-//     deviceName = "Galaxy*"
-//   } else if (platformName == 'iOS') {
-//     deviceName = 'iPhone*'
-//   }
-// }
+if (deviceName == null) {
+  if (platformName == 'Android') {
+    deviceName = "Galaxy*"
+  } else if (platformName == 'iOS') {
+    deviceName = 'iPhone*'
+  }
+}
 
 const kobitonServerConfig = {
   protocol: 'https',
